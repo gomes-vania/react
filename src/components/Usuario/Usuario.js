@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiTrash2 } from 'react-icons/fi';
 
 import './Usuario.css'
 
@@ -9,10 +11,13 @@ function Usuario(props) {
         <li><strong>ID:</strong> {props.usuario.id}</li>
         <li><strong>Nome:</strong> {props.usuario.nome} {props.usuario.sobrenome}</li>
         <li><strong>Email:</strong> {props.usuario.email}</li>
+        <li><Link to={`/usuario/${props.usuario.id}`}>Detalhes</Link></li>
       </ul>
-      <button onClick={props.removerUsuario}>&times;</button>
-    </div>
+      <div className="icon">
+         <button onClick={props.removerUsuario}><FiTrash2 /></button>
+      </div>
+  </div>
   )
 }
 
-export default Usuario
+export default Usuario;

@@ -21,9 +21,14 @@
   color: #DA3C78;
 }
 
-.Usuario button {
-  top: 0.5rem;
+.icon {
+  position: absolute;
+  top: 0;
   right: 0.5rem;
+  float: right;
+}
+
+.Usuario button {
   border: none;
   outline: none;
   color: #FFF;
@@ -33,10 +38,10 @@
   font-size: 1.5rem;
   font-weight: 700;
   font-family: sans-serif;
-  position: absolute;
   border-radius: 1.5rem;
   background-color: #ced4da;
-  padding: .2rem .35rem .35rem .35rem;
+  padding: 0.2rem;
+  margin: 0.4rem;
 }
 
 .Usuario button:hover,
