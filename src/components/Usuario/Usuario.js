@@ -12,6 +12,7 @@ function Usuario(props) {
         <li><strong>Nome:</strong> {props.usuario.nome} {props.usuario.sobrenome}</li>
         <li><strong>Email:</strong> {props.usuario.email}</li>
         <li><Link to={`/usuario/${props.usuario.id}`}>Detalhes</Link></li>
+        <li><Link to={`/atualiza/${props.usuario.id}`}>Atualizar</Link></li>
       </ul>
       <div className="icon">
          <button onClick={props.removerUsuario}><FiTrash2 /></button>

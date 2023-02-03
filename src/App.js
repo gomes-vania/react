@@ -39,7 +39,7 @@ function App() {
             <DetalhesUsuario />
           </Route>
 
-          <Route path="/atualiza">
+          <Route path="/atualiza/:id">
             <AtualizaUsuarios />
           </Route>
 
