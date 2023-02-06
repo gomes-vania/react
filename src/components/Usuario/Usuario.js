@@ -1,10 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import  { Link } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 
-import './Usuario.css'
+import './Usuario.css';
 
 function Usuario(props) {
+
+  
+   // return <Navigate to="/atualiza/:id"/>;
+
+
+    //return  <Redirect to={"/atualiza/:id"} />
+  
   return (
     <div className="Usuario">
       <ul>
@@ -19,6 +26,6 @@ function Usuario(props) {
       </div>
   </div>
   )
-}
+  }
 
 export default Usuario;

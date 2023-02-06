@@ -27,37 +27,35 @@ const AtualizaUsuarios = () => {
           })
         }
       })
-  }, [id])
+  }, [id]) 
 
   const handleChange = (event) => {
     setFormData({
-      [event.target.name]: event.target.value,
-      [event.target.sobrenome]: event.target.value,
-      [event.target.email]: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
-  const handleSubmit = usuario => {
+  const handleSubmit = () => {
+    
     try {
-      fetch(`https://reqres.in/api/users/atualiza/${id}`,{
+       fetch(`https://localhost:8080/reqres.in/api/users/${id}`,{
         method: 'PUT',
+        body: JSON.stringify({
+          nome: '',
+          sobrenome:'',
+          email: '',
+        }),
         headers: {
-          'Content-Type': 'application/json',
+          'Content-type': 'application/json; charset=UTF-8',
         },
-        body: JSON.stringify(formData),
-      }).then(resposta => {
-        if (resposta.ok) {
-          console.log('funcionou')
-          // alert('funcionou!')
-          // window.confirm("Atualizou")
-        } else {
-          window.confirm("Algo deu errado ao atualizar os dados");
-        }
-      });
-
-      // Trate a resposta da API da forma que achar melhor
-    } catch (error) {
-      console.error(error);
+      })
+        .then((response) => response.json()
+           (response.ok),
+             alert('Atualizou')    
+        )
+        .then((json) => console.log(json))
+    }  catch {
+      alert("Erro ao atualizar!");
     }
   };
   
@@ -77,7 +75,7 @@ const AtualizaUsuarios = () => {
         
       <label>Sobrenome</label>
         <input
-          type="sobrenome"
+          type="text"
           name="sobrenome"
           value={formData.sobrenome}
           onChange={handleChange}
@@ -85,7 +83,7 @@ const AtualizaUsuarios = () => {
       </input>
       <label>Email</label>
         <input
-          type="email"
+          type="text"
           name="email"
           value={formData.email}
           onChange={handleChange}
