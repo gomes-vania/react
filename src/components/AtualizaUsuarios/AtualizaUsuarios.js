@@ -7,18 +7,24 @@ const AtualizaUsuarios = () => {
 
   const { id } = useParams()
 
-  const [formData, setFormData] = useState({
+  const [usuario, setUsuario] = useState([]);
+  const [formData, setFormData] = useState ({
     nome: '',
-    sobrenome:'',
-    email: '',
-  });
-
+    sobrenome: '',
+    email: ''
+   })
+  
   useEffect(() => {
-    fetch(`https://reqres.in/api/users/${id}`)
+    fetch(`https://reqres.in/api/users/${id}`, {
+      method: 'GET', 
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
       .then(resposta => resposta.json())
       .then(dados => {
         if (dados.data) {
-          setFormData({
+          setUsuario({
             id: dados.data.id,
             nome: dados.data.first_name,
             sobrenome: dados.data.last_name,
@@ -27,43 +33,30 @@ const AtualizaUsuarios = () => {
           })
         }
       })
-  }, [id]) 
+  }, [id])
 
   const handleChange = (event) => {
-    setFormData({
-      [event.target.name]: event.target.value
-    });
+    setFormData({[event.target.name]: event.target.value });
   };
 
   const handleSubmit = () => {
-    
-    try {
-       fetch(`https://localhost:8080/reqres.in/api/users/${id}`,{
-        method: 'PUT',
-        body: JSON.stringify({
-          nome: '',
-          sobrenome:'',
-          email: '',
-        }),
+       fetch(`https://reqres.in/api/users/atualiza/${usuario.id}`,{
+        method: 'PATCH',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
+        body: JSON.stringify(usuario)
       })
         .then((response) => response.json()
-           (response.ok),
-             alert('Atualizou')    
-        )
-        .then((json) => console.log(json))
-    }  catch {
-      alert("Erro ao atualizar!");
-    }
-  };
-  
+        .then((data) => {
+          setUsuario(data)
+        }) 
+      .catch (err => console.log(err))
+  )}
 
   return (
     <div className="AdicionarUsuario">
-    <form onSubmit={handleSubmit}>
-      
+    <form onSubmit= {handleSubmit}>
         <label>Nome</label>
         <input
           type="text"
