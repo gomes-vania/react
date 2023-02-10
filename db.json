@@ -1,0 +1,16 @@
+{
+  "pessoas": [
+    {
+      "id": 1,
+      "nome": "Vânia",
+      "sobrenome": "Gomes",
+      "email": "vaniagomes.if@gmail.com"
+    },
+    {
+      "nome": "George ",
+      "sobrenome": "Bluth",
+      "email": "george.bluth@reqres.in",
+      "id": 3
+    }
+  ]
+}

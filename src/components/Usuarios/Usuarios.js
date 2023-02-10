@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-import Usuario from '../Usuario/Usuario.js';
+import Usuario from '../Usuario/Usuario.js'
 
 function Usuarios() {
 
   const [usuarios, setUsuarios] = useState([])
 
   useEffect(() => {
-    fetch('https://reqres.in/api/users')
+    fetch('http://localhost:3000/pessoas')
     .then(resposta => resposta.json())
     .then(dados => {
-      const usuarios = dados.data.map(usuario => ({
+      const usuarios = dados.map(usuario => ({
         id: usuario.id,
-        nome: usuario.first_name,
-        sobrenome: usuario.last_name,
+        nome: usuario.nome,
+        sobrenome: usuario.sobrenome,
         email: usuario.email
       }))
 
@@ -23,7 +23,7 @@ function Usuarios() {
 
   const removerUsuario = usuario => {
     if (window.confirm(`Tem certeza que deseja remover "${usuario.nome} ${usuario.sobrenome}"?`)) {
-      fetch(`https://reqres.in/api/users/${usuario.id}`, {
+      fetch(`http://localhost:3000/pessoas/${usuario.id}`, {
         method: 'DELETE'
       })
         .then(resposta => {

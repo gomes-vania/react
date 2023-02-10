@@ -13,7 +13,7 @@ function AdicionarUsuario(props) {
 
     const usuario = { nome, sobrenome, email }
 
-    fetch('https://reqres.in/api/users', {
+    fetch('http://localhost:3000/pessoas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(usuario)

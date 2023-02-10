@@ -7,15 +7,10 @@ const AtualizaUsuarios = () => {
 
   const { id } = useParams()
 
-  const [usuario, setUsuario] = useState([]);
-  const [formData, setFormData] = useState ({
-    nome: '',
-    sobrenome: '',
-    email: ''
-   })
+  const [usuario, setUsuario] = useState({});
   
   useEffect(() => {
-    fetch(`https://reqres.in/api/users/${id}`, {
+    fetch(`http://localhost:3000/pessoas/${id}`, {
       method: 'GET', 
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -23,25 +18,25 @@ const AtualizaUsuarios = () => {
     })
       .then(resposta => resposta.json())
       .then(dados => {
-        if (dados.data) {
+        if (dados) {
           setUsuario({
-            id: dados.data.id,
-            nome: dados.data.first_name,
-            sobrenome: dados.data.last_name,
-            email: dados.data.email,
-            foto: dados.data.avatar
+            id: dados.id,
+            nome: dados.nome,
+            sobrenome: dados.sobrenome,
+            email: dados.email
           })
         }
       })
   }, [id])
 
   const handleChange = (event) => {
-    setFormData({[event.target.name]: event.target.value });
+    setUsuario({[event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {
-       fetch(`https://reqres.in/api/users/atualiza/${usuario.id}`,{
-        method: 'PATCH',
+  const handleSubmit = (event) => {
+       event.preventDefault();
+       fetch(`http://localhost:3000/pessoas/atualiza${usuario.id}`,{
+        method: 'PUT',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
@@ -49,6 +44,8 @@ const AtualizaUsuarios = () => {
       })
         .then((response) => response.json()
         .then((data) => {
+          console.log(data)
+          alert("Atualizou")
           setUsuario(data)
         }) 
       .catch (err => console.log(err))
@@ -61,7 +58,7 @@ const AtualizaUsuarios = () => {
         <input
           type="text"
           name="nome"
-          value={formData.nome}
+          value={usuario.nome}
           onChange={handleChange}
          >
         </input>
@@ -70,7 +67,7 @@ const AtualizaUsuarios = () => {
         <input
           type="text"
           name="sobrenome"
-          value={formData.sobrenome}
+          value={usuario.sobrenome}
           onChange={handleChange}
         >
       </input>
@@ -78,7 +75,7 @@ const AtualizaUsuarios = () => {
         <input
           type="text"
           name="email"
-          value={formData.email}
+          value={usuario.email}
           onChange={handleChange}
         >
       </input>
