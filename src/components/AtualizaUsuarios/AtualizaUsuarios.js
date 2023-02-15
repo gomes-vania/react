@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiRefreshCw } from 'react-icons/fi';
+//import AdicionarUsuario from '../AdicionarUsuario/AdicionarUsuario'
 import './AtualizaUsuarios.css';
 
 const AtualizaUsuarios = () => {
@@ -8,7 +9,7 @@ const AtualizaUsuarios = () => {
   const { id } = useParams()
 
   const [usuario, setUsuario] = useState({});
-  
+
   useEffect(() => {
     fetch(`http://localhost:3000/pessoas/${id}`, {
       method: 'GET', 
@@ -35,7 +36,7 @@ const AtualizaUsuarios = () => {
 
   const handleSubmit = (event) => {
        event.preventDefault();
-       fetch(`http://localhost:3000/pessoas/atualiza${usuario.id}`,{
+       fetch(`http://localhost:3000/pessoas/${id}`,{
         method: 'PUT',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -45,6 +46,7 @@ const AtualizaUsuarios = () => {
         .then((response) => response.json()
         .then((data) => {
           console.log(data)
+          //event.AdicionarUsuario.onSubmitHandler(usuario)
           alert("Atualizou")
           setUsuario(data)
         }) 

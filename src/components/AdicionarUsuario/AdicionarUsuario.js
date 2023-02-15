@@ -8,7 +8,7 @@ function AdicionarUsuario(props) {
   const [sobrenome, setSobrenome] = useState('')
   const [email, setEmail] = useState('')
  
-  function onSubmitHandler(event) {
+function onSubmitHandler(event) {
     event.preventDefault()
 
     const usuario = { nome, sobrenome, email }
